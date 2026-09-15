@@ -1,0 +1,82 @@
+[
+  {
+    "file": "local-tested-driver/7.2.4-arch1-2/nvidia.ko",
+    "sha256": "5bc38891199988d253af1112c4e104a44bf97dd07c24fb316d550b70c4b12869",
+    "version": "615.71.09",
+    "vermagic": "7.2.4-arch1-2 SMP preempt mod_unload",
+    "license": "NVIDIA",
+    "srcversion": "329D97755EFA31D5314E8F0"
+  },
+  {
+    "file": "local-tested-driver/7.2.4-arch1-2/nvidia-uvm.ko",
+    "sha256": "1afb65e395d1a6eb2aa35f1961f86861e954be7b617784d19a77167824b7d135",
+    "version": "615.71.09",
+    "vermagic": "7.2.4-arch1-2 SMP preempt mod_unload",
+    "license": "Dual MIT/GPL",
+    "srcversion": "064C13389A454AA4AAF638E"
+  },
+  {
+    "file": "local-tested-driver/7.2.4-arch1-2/nvidia-modeset.ko",
+    "sha256": "58db7a3b74657de9545f4ea7a8de99a35c2a3b4148e024e57c0b25ba848da003",
+    "version": "615.71.09",
+    "vermagic": "7.2.4-arch1-2 SMP preempt mod_unload",
+    "license": "NVIDIA",
+    "srcversion": "C86CA92D8E48780F19CB46E"
+  },
+  {
+    "file": "local-tested-driver/7.2.4-arch1-2/nvidia-drm.ko",
+    "sha256": "69c7e08562525d25578bf0020b85b5ca8aad3d26d7da8c1ab7c8ea831cb48630",
+    "version": "615.71.09",
+    "vermagic": "7.2.4-arch1-2 SMP preempt mod_unload",
+    "license": "MIT",
+    "srcversion": "E22EBDCD6BCC5889463CFBF"
+  },
+  {
+    "file": "local-tested-driver/7.2.4-1-cachyos/nvidia.ko",
+    "sha256": "f1a9c9e550d56242741d73503c1b996d4642725c0a2ef9fcca345f90c8c774e3",
+    "version": "615.71.09",
+    "vermagic": "7.2.4-1-cachyos SMP preempt mod_unload",
+    "license": "NVIDIA",
+    "srcversion": "329D97755EFA31D5314E8F0"
+  },
+  {
+    "file": "local-tested-driver/7.2.4-1-cachyos/nvidia-uvm.ko",
+    "sha256": "4b9ab4a30c9cd1b9aa9f7a8994bed769a269539b647b5ae19af42aa62cf5d3a1",
+    "version": "615.71.09",
+    "vermagic": "7.2.4-1-cachyos SMP preempt mod_unload",
+    "license": "Dual MIT/GPL",
+    "srcversion": "064C13389A454AA4AAF638E"
+  },
+  {
+    "file": "local-tested-driver/7.2.5-1-cachyos/nvidia.ko",
+    "sha256": "7ed66460ba04c99f45113d0e7de293810594aeb4fc70ab19bc834dc158344121",
+    "version": "615.71.09",
+    "vermagic": "7.2.5-1-cachyos SMP preempt mod_unload",
+    "license": "NVIDIA",
+    "srcversion": "329D97755EFA31D5314E8F0"
+  },
+  {
+    "file": "local-tested-driver/7.2.5-1-cachyos/nvidia-uvm.ko",
+    "sha256": "9f7c3c79b3ed9438164849ba39df728e5105b9907883ecb4125377a3df3d5e0f",
+    "version": "615.71.09",
+    "vermagic": "7.2.5-1-cachyos SMP preempt mod_unload",
+    "license": "Dual MIT/GPL",
+    "srcversion": "064C13389A454AA4AAF638E"
+  },
+  {
+    "file": "local-tested-driver/7.2.5-1-cachyos/nvidia-modeset.ko",
+    "sha256": "1d3694df2a7c16e19a83be9a8d3793727c712df15f1f07df102d5ba6002a95ea",
+    "version": "615.71.09",
+    "vermagic": "7.2.5-1-cachyos SMP preempt mod_unload",
+    "license": "NVIDIA",
+    "srcversion": "C86CA92D8E48780F19CB46E"
+  },
+  {
+    "file": "local-tested-driver/7.2.5-1-cachyos/nvidia-drm.ko",
+    "sha256": "cb56a5bd3ea8ecf94bb3dfaad34623162f5362bd5243dbf7131a9596207efc8a",
+    "version": "615.71.09",
+    "vermagic": "7.2.5-1-cachyos SMP preempt mod_unload",
+    "license": "MIT",
+    "srcversion": "E22EBDCD6BCC5889463CFBF"
+  }
+]

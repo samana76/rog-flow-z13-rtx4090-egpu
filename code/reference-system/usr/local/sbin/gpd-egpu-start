@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+case "$(uname -r)" in
+  7.2.4-arch1-2|7.2.5-1-cachyos) exec /usr/bin/python3 /opt/gpd-egpu/display-extension/display-start.py "$@" ;;
+  *) exec /usr/bin/python3 /opt/gpd-egpu/615.71.09/loader.py "$@" ;;
+esac

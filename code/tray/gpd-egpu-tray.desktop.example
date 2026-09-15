@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=GPD eGPU tray
+Comment=Safely disconnect the GPD eGPU before unplugging
+Exec=/usr/bin/python3 /home/EGPU_USER/.local/share/gpd-egpu-tray/egpu-tray.py
+Icon=video-display
+Terminal=false
+Categories=System;

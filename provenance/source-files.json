@@ -1,0 +1,268 @@
+[
+  {
+    "file": "code/reference-system/opt/gpd-egpu/615.71.09/guard.py",
+    "source": "read-only inventory: /opt/gpd-egpu/615.71.09/guard.py",
+    "source_sha256": "02ca6d1cd28371c0e05335e102476b406843dc1639731b01f6d3e19f801ab497",
+    "bundled_sha256": "02513130f78915244e9f525ab7331f53d2306a4bdeb75b752542bfa92bc563d8",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/615.71.09/loader.py",
+    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
+    "source_sha256": "1258e233f5e109b811f340c35ec9dc1c2900a6c1f46cf0e3c1e731008d582404",
+    "bundled_sha256": "1258e233f5e109b811f340c35ec9dc1c2900a6c1f46cf0e3c1e731008d582404",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/display-extension/display-start.py",
+    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
+    "source_sha256": "c6f6237b172b7f8ace66387b521b6bf913842d04d8c24bd89ac0150336fd06fd",
+    "bundled_sha256": "7dbf4c3923ebb42402476fcfc2cf67be2fa357d2a6917d61ea694027ae2492d6",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/auto/restart-clean-cycle.py",
+    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
+    "source_sha256": "e728f950fa4d0fced0bdd02e0a416e9b2fac3e4b3a1fcee01f44e91669c15aec",
+    "bundled_sha256": "051572e77caea850ca4cc0c74a55533a0c95f99e6315ab2b4707b24e01adf16e",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/auto/auto-start.py",
+    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
+    "source_sha256": "800c1c117ab634ad560022c5d54c53c9d66f6334536dc9b6853609b2a548b2fc",
+    "bundled_sha256": "800c1c117ab634ad560022c5d54c53c9d66f6334536dc9b6853609b2a548b2fc",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/reference-system/usr/local/sbin/gpd-egpu-start",
+    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
+    "source_sha256": "68c09c249104918c84ed27b7f5514f02c22737d0381ce54f28208bfd079e0245",
+    "bundled_sha256": "68c09c249104918c84ed27b7f5514f02c22737d0381ce54f28208bfd079e0245",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/reference-system/usr/local/libexec/gpd-egpu-eject",
+    "source": "Installed dual-kernel eject payload; owner confirmed physical cycle",
+    "source_sha256": "5f6bfc8d267f6818a81c5834534164c069e33bb3c3156c6415316caba1984fde",
+    "bundled_sha256": "eb615611bd249c1ca7ad9d4adf02ac54981f19a79b64603a7e836816a724a706",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/99-gpd-egpu-auto.rules",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/99-gpd-egpu-auto.rules",
+    "source_sha256": "883dd925a7bf4cb98c44c6ccccf01b53917099ed4ea69c7e813e472ee8bc51f5",
+    "bundled_sha256": "883dd925a7bf4cb98c44c6ccccf01b53917099ed4ea69c7e813e472ee8bc51f5",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/gpd-egpu-auto.service",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/gpd-egpu-auto.service",
+    "source_sha256": "8dca39b7ef6c6ad67a325f9d309a14c99df2c913d717bdf2be200dfca6356463",
+    "bundled_sha256": "8dca39b7ef6c6ad67a325f9d309a14c99df2c913d717bdf2be200dfca6356463",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/auto-clean-cycle.py",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/auto-clean-cycle.py",
+    "source_sha256": "2328b799bba9253aa64b3d5c1b925816fee9e6ccc4c1d1e4f117dfdd4a046b66",
+    "bundled_sha256": "2328b799bba9253aa64b3d5c1b925816fee9e6ccc4c1d1e4f117dfdd4a046b66",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/restart-clean-cycle.py",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/restart-clean-cycle.py",
+    "source_sha256": "02086a9fb1f26351c924860134061efc06a42cfc2e77aefaa543218b080ef485",
+    "bundled_sha256": "88076136692aba45fc5267c9ca14aa57e6c4c212acd98f4fe45595a05e052e2e",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/install-passwordless-eject.py",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/install-passwordless-eject.py",
+    "source_sha256": "19b50ebd92b557b2e3d6ca93057055472d1466781e46cd0a3e4d38e5c1ba08a8",
+    "bundled_sha256": "e8d9fe49a55b4534dcf81c16a5b749e6b5e38567c9a883a0b85823f6041f3e1d",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/passwordless-eject-rule-preview.rules",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/passwordless-eject-rule-preview.rules",
+    "source_sha256": "0b1cccdd09b73ae222a189303b85255c5e20b426138267f1a62d984e39107c5e",
+    "bundled_sha256": "d3a76711021ff1882207b24fe355de837def436a914f2b7d5eacd9e9a9b514ff",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "tests/test_clean_reconnect.py",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/test_clean_reconnect.py",
+    "source_sha256": "cb7b3dde3d2e235747bdd40c9083e2bbc594020578651b4eb65ea70b1a4c81ed",
+    "bundled_sha256": "1862d553536ac7e82c278834f33463363106da26abb51b0bc1822e94582c98d1",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "tests/test_eject.py",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/test_eject.py",
+    "source_sha256": "7b9d446f793ac3ab30a45e737177b469b3493fbc30d82b5269bc1fecd1382f68",
+    "bundled_sha256": "e8d9162e1e1839055892557dc1d0ec2a32b674f756ea3bc1c5dc52da0ad3a950",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "tests/test_restart_after_eject.py",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/test_restart_after_eject.py",
+    "source_sha256": "f9a56920ddf9cdf91c5af7c132b7e723b71b5eb971c8963bf36ce2e6487ae614",
+    "bundled_sha256": "f22231cd950225d4a4e5bccb6766176ff4648d14874ec364f53386f3c326503f",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "config/99-usb4-tunnel-ports-awake.rules",
+    "source": "/etc/udev/rules.d/99-usb4-tunnel-ports-awake.rules",
+    "source_sha256": "598fc3de2dcb43c38518b16eb1919efc5737139ddee2b350dd63800563975241",
+    "bundled_sha256": "598fc3de2dcb43c38518b16eb1919efc5737139ddee2b350dd63800563975241",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "config/zz-nvidia-egpu.conf",
+    "source": "/etc/modprobe.d/zz-nvidia-egpu.conf",
+    "source_sha256": "2e7349e0c5d4400777b50df0512ce6cc4702a601d58758907b188c27ff325717",
+    "bundled_sha256": "2e7349e0c5d4400777b50df0512ce6cc4702a601d58758907b188c27ff325717",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "config/zzz-gpd-egpu-controlled-load.conf",
+    "source": "/etc/modprobe.d/zzz-gpd-egpu-controlled-load.conf",
+    "source_sha256": "936b753df9f4b12071acb7e983315e2b71002a971bfb3702a8b4fe4358463bed",
+    "bundled_sha256": "936b753df9f4b12071acb7e983315e2b71002a971bfb3702a8b4fe4358463bed",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/tray/egpu-tray.py",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/tray/egpu-tray.py",
+    "source_sha256": "5a3397e88f9aae511fdc0435dd5994e40a70821332e2f877efa2f967dbb79c5a",
+    "bundled_sha256": "4725123b7ec314a9daf6b6103ae3c9946f90b206f7cff2b9650e2f77ddd84539",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/tray/native-tray.cpp",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/tray/native-tray.cpp",
+    "source_sha256": "88a9ad7485a0d8e9638fa86886c60e045b863f61bd172474b2d2b634c80cab81",
+    "bundled_sha256": "88a9ad7485a0d8e9638fa86886c60e045b863f61bd172474b2d2b634c80cab81",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/tray/test_tray.py",
+    "source": "/home/EGPU_USER/egpu-staged/working-loader/tray/test_tray.py",
+    "source_sha256": "1202a8197fac34012b81c549c3f2455b09ee1fef91fb10ec6632230d9f294ac5",
+    "bundled_sha256": "1202a8197fac34012b81c549c3f2455b09ee1fef91fb10ec6632230d9f294ac5",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/historical-validation/cuda-arch-small-kernel.py",
+    "source": "archived successful trial source",
+    "source_sha256": "5f18e3378fb41aae1c43b3a4fcf992408fcf90d29e0d6431145990c9dcb10177",
+    "bundled_sha256": "5f18e3378fb41aae1c43b3a4fcf992408fcf90d29e0d6431145990c9dcb10177",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/historical-validation/cuda-arch-bounded-kernel.py",
+    "source": "archived successful trial source",
+    "source_sha256": "bb0fedc62a91be7cb8af602f31df6eed314658ce6b03f24f7310bf3be2f8e358",
+    "bundled_sha256": "bb0fedc62a91be7cb8af602f31df6eed314658ce6b03f24f7310bf3be2f8e358",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/historical-validation/build-arch.py",
+    "source": "archived successful trial source",
+    "source_sha256": "6977b338d810a4455f85ef99445c61805595478a5ceeeacd4f92285b903d7bcb",
+    "bundled_sha256": "6977b338d810a4455f85ef99445c61805595478a5ceeeacd4f92285b903d7bcb",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/install-loader.py",
+    "source": "historical maintenance source: install-loader.py",
+    "source_sha256": "6f74a0d770a99c68bca34375525b4d2a9b5eb35293cc72c6bcbdd061c8bdf0d4",
+    "bundled_sha256": "6f74a0d770a99c68bca34375525b4d2a9b5eb35293cc72c6bcbdd061c8bdf0d4",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/install-display-loader.py",
+    "source": "historical maintenance source: install-display-loader.py",
+    "source_sha256": "98bdfc5ee62e551fa067fbfc5cd29177ee2cdd125c4e70932f6be086ab2674d3",
+    "bundled_sha256": "98bdfc5ee62e551fa067fbfc5cd29177ee2cdd125c4e70932f6be086ab2674d3",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/install-auto.py",
+    "source": "historical maintenance source: install-auto.py",
+    "source_sha256": "35c7e2c66f4096ab27d7b521d39f91d2e129ee9e26dbb1c6e03c989a2a641d64",
+    "bundled_sha256": "35c7e2c66f4096ab27d7b521d39f91d2e129ee9e26dbb1c6e03c989a2a641d64",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/install-clean-reconnect.py",
+    "source": "historical maintenance source: install-clean-reconnect.py",
+    "source_sha256": "32c5163d4faa4f02296c1eae183a0ccc18323e8ae9480573850dc0c5c7d42fcf",
+    "bundled_sha256": "32c5163d4faa4f02296c1eae183a0ccc18323e8ae9480573850dc0c5c7d42fcf",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/remove-startup-delays.py",
+    "source": "historical maintenance source: remove-startup-delays.py",
+    "source_sha256": "4ea30552048307f9a5e924c07fbf1e5c74793d01c0542d7b37f4c250a3e26b4e",
+    "bundled_sha256": "4ea30552048307f9a5e924c07fbf1e5c74793d01c0542d7b37f4c250a3e26b4e",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/install-eject.py",
+    "source": "historical maintenance source: install-eject.py",
+    "source_sha256": "597ab3562da1fa3745a891230891f78c3374c3538ee6bf5d3cdddaf520baf691",
+    "bundled_sha256": "597ab3562da1fa3745a891230891f78c3374c3538ee6bf5d3cdddaf520baf691",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/maintenance/update-eject-clients.py",
+    "source": "historical maintenance source: update-eject-clients.py",
+    "source_sha256": "c79229e970eba977a21b7f62afaf177618fd17387b9d887f9f95ec4db1d3f0c1",
+    "bundled_sha256": "c79229e970eba977a21b7f62afaf177618fd17387b9d887f9f95ec4db1d3f0c1",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/update-reference/install-dual-kernel.py",
+    "source": "Machine-specific integration installer; historical deployment reference",
+    "source_sha256": "d4fa62ee827402bc5c9c5fe7339a6e9d8357d922c98b23add6f1082bf2d76490",
+    "bundled_sha256": "898a7c99657fd45ac031a06cc1b1b92c0372ba4e0cae58690fc43be22cf61b96",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/update-reference/install-cachyos-eject.py",
+    "source": "Machine-specific integration installer; historical deployment reference",
+    "source_sha256": "debb4fd94c75ff93bdad66391c1d324571f55afb1659b5a99395bcde45ffc4f2",
+    "bundled_sha256": "e77969cb48d91ff9adacb187a0ea0b7b7ebeb09829df226a30f1808bde1611d3",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/pending-lact/install-lact-restore.py",
+    "source": "Staged conditional LACT restoration; installation and live validation not confirmed",
+    "source_sha256": "24c33c23547d6d0d5becc83e8ab0625ecb276562e3afad4a1923030fcd15e812",
+    "bundled_sha256": "4cd38103afc51364cd5f073b3b430b7e46eda84306ffa1f6e8df78af7ec344fc",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/pending-lact/restart-with-lact.py",
+    "source": "Staged conditional LACT restoration; installation and live validation not confirmed",
+    "source_sha256": "d451a02d9b6bd7969750a6f3d0d0aa98c8775c8eec2fe8bd054d1e0911fdb3f7",
+    "bundled_sha256": "091e6a3b7e01121597d53abafa71f2186082e799343b163fe9990a800c2ed041",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "tests/test_lact_restore.py",
+    "source": "Six unit tests of staged LACT restoration",
+    "source_sha256": "95c5a2744ad1d90b61a3a86015511aa2ff9528070d63739581240303e3d1a9de",
+    "bundled_sha256": "53a55ec146706d187ea3fc8ebbba9807af78e92cb456d91e0fc28ce9d4e6b649",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/historical-validation/cuda-cachyos-7.2.5-small.py",
+    "source": "Tiny CUDA child validated on CachyOS7.2.5",
+    "source_sha256": "8866fb7fae5032e4b2a85f72978a0a4460fc6f224c72e2fbbf069d690ea309cb",
+    "bundled_sha256": "8866fb7fae5032e4b2a85f72978a0a4460fc6f224c72e2fbbf069d690ea309cb",
+    "redaction": "account name replaced with EGPU_USER"
+  }
+]

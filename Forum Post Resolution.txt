@@ -1,0 +1,326 @@
+ASUS ROG Flow Z13 + GPD Thunderbolt 5 eGPU + RTX 4090: working CUDA, external display and reconnect on CachyOS
+
+  I wanted to share what finally got my eGPU working, because this turned into quite a troubleshooting session.
+
+  The short version: the working combination on my machine is NVIDIA’s proprietary 615.71.09 kernel modules, with GSP disabled, NVIDIA runtime power management disabled, and the USB4 root ports plus the GPU/
+  audio functions kept out of runtime suspend.
+
+  CUDA and external display output now work. The eGPU loads automatically at boot or when connected, and I have a KDE tray action for safely disconnecting it. Reconnecting after that brings it back
+  automatically.
+
+  There are still two caveats: surprise unplugging is unsafe, and I’ve had an intermittent hang while rebooting with the eGPU active. More on those below.
+
+  ## My setup
+
+  - Laptop: ASUS ROG Flow Z13 GZ302EA
+  - Platform: AMD Strix Halo, integrated Radeon graphics
+  - BIOS: GZ302EA.314
+  - Enclosure: GPD TBT5-EGPU
+  - Thunderbolt bridge: Intel JHL9480, PCI ID 8086:5786
+  - GPU: ASUS RTX 4090, AD102/Ada, PCI ID 10de:2684
+  - Desktop: KDE Plasma / KWin Wayland
+  - Working kernels:
+      - Stock Arch 7.2.4-arch1-2
+      - CachyOS 7.2.5-1-cachyos
+
+  - Working NVIDIA driver/userspace: 615.71.09
+
+  Earlier compute tests also passed on CachyOS 7.2.4-1-cachyos.
+
+  The internal display stays on AMD. NVIDIA drives the external monitor when one is connected and handles CUDA workloads independently.
+
+  One important distinction: this is an RTX 4090/Ada setup, not Blackwell.
+
+  ## Where we started
+
+  The initial direction came from this project:
+
+  https://github.com/djanice1980/eGPU-Blackwell-Stability
+
+  Its findings for the same laptop/platform and JHL9480 bridge were particularly relevant:
+
+  1. BIOS 314 improved the platform behavior.
+  2. NVreg_DynamicPowerManagement=0 had to actually take effect.
+  3. Both USB4 PCIe tunnel root ports needed to stay awake.
+
+  That was a useful starting point, but those settings alone didn’t resolve every problem on my machine.
+
+  My BIOS was already 314, so I can’t personally quantify the improvement from the BIOS update. It was part of the baseline for these tests.
+
+  ## The biggest problem: hard resets during NVIDIA initialization
+
+  Initially, plugging in the eGPU—or booting with it connected—could crash and reboot the laptop.
+
+  We eventually separated basic PCIe enumeration from NVIDIA initialization. With NVIDIA loading blocked, the GPU and its JHL9480 parent bridge could enumerate and remain readable during a 60-second
+  observation.
+
+  Loading or initializing the NVIDIA driver was where some trials fell over.
+
+  After the hard resets, the next boot recorded:
+
+  x86/amd: Previous system reset reason [0x08000800]:
+  an uncorrected error caused a data fabric sync flood event
+
+  In one trial, the last recorded operation was:
+
+  nvidia-smi -L
+
+  In other trials, it was insertion of the NVIDIA core module.
+
+  Those checkpoints tell us where the machine stopped responding. They don’t identify the underlying defect by themselves.
+
+  We tried the stock open driver and later patched open-module builds. Patched 615 trials still hard-reset on both the Arch and CachyOS kernels. Simply changing kernels wasn’t the fix.
+
+  ## What finally worked: proprietary NVIDIA with GSP off
+
+  The breakthrough was using NVIDIA’s unpatched proprietary 615.71.09 modules, built for the exact kernel being tested, with:
+
+  NVreg_DynamicPowerManagement=0
+  NVreg_EnableGpuFirmware=0
+
+  That combination successfully initialized the GPU and survived NVML, CUDA and display testing.
+
+  To be clear, we didn’t write a replacement NVIDIA driver. The successful modules came from NVIDIA’s proprietary kernel/ source tree, rather than kernel-open/. The custom code is the loading, validation,
+  power-policy and connect/disconnect integration.
+
+  Also, I don’t want to oversell the diagnosis: this wasn’t a perfectly controlled test of GSP alone. Module flavor, firmware path and patch status changed between some attempts. Proprietary + GSP off is the
+  combination that worked here; that doesn’t prove GSP alone caused every earlier crash.
+
+  These settings are not instructions to disable GSP on the open modules. The successful configuration specifically uses the proprietary driver.
+
+  ## Making sure DPM really was disabled
+
+  One easy trap was assuming that writing a modprobe option meant it had won.
+
+  A distro modprobe file can supply another value later in the configuration order. We used a late-sorting override:
+
+  /etc/modprobe.d/zz-nvidia-egpu.conf
+
+  Containing:
+
+  options nvidia NVreg_DynamicPowerManagement=0
+
+  But the authoritative check was the loaded driver’s actual state:
+
+  cat /proc/driver/nvidia/params
+
+  The working configuration reported:
+
+  DynamicPowerManagement: 0
+  EnableGpuFirmware: 0
+
+  The guarded loader also explicitly supplied both options when loading the proprietary core module.
+
+  nvidia-smi -q reported:
+
+  GSP Firmware Version: N/A
+
+  We also hit an overly strict test that insisted on a particular “Runtime D3” status string. That was a validation-script assumption, not proof that the DPM override had failed. The live parameters and actual
+  behavior mattered more than matching one diagnostic string.
+
+  ## Keeping the USB4 tunnel and GPU awake
+
+  Both laptop USB4 tunnel root ports are pinned to:
+
+  power/control = on
+
+  The root ports are:
+
+  0000:00:01.1
+  0000:00:01.2
+
+  The NVIDIA display function and its HDA audio function also need that policy.
+
+  The audio function caught us out: the GPU could be on while its audio function was still auto. We added handling for the relevant add/bind events and verified the final state after driver binding.
+
+  The persistent udev rule is:
+
+  /etc/udev/rules.d/99-usb4-tunnel-ports-awake.rules
+
+  The NVIDIA matches use vendor/class information rather than a fixed PCI address.
+
+  That matters because the GPU appeared through different ports as:
+
+  0000:03:00.0
+
+  or:
+
+  0000:63:00.0
+
+  The loader discovers the GPU and immediate parent bridge dynamically.
+
+  Another correction: the USB4 udev rule does not have to be embedded in the initramfs. The reference implementation applies it during normal udev coldplug. An unused root port may have accumulated some
+  suspended time before the rule ran; that alone isn’t a failure if its final policy is on.
+
+  ## Checking the tunnel before initializing NVIDIA
+
+  The guarded tests read PCI configuration space for the GPU and its JHL9480 parent before touching NVIDIA initialization.
+
+  The hard-stop conditions included:
+
+  - Configuration space reading as all ff
+  - Invalid or inaccessible configuration data
+  - Header type 7f
+
+  If the bridge or GPU was already inaccessible, the test stopped and saved diagnostics. It did not try to revive the device with rescans, resets or repeated driver loading.
+
+  That distinction was useful: “the GPU isn’t enumerated yet,” “the tunnel is dead,” and “NVIDIA initialization failed” are different situations.
+
+  ## CUDA results
+
+  With proprietary 615, GSP off, DPM0 and the power pins in place:
+
+  - nvidia-smi worked.
+  - A tiny CUDA kernel ran and returned 256 verified results.
+  - PCI configuration remained readable after the test.
+  - NVML still worked after a 60-second idle period.
+
+  On Arch 7.2.4 and the earlier CachyOS 7.2.4, a larger bounded test also passed: 60 rounds using 64-MiB transfers and kernel launches, followed by another idle check.
+
+  On CachyOS 7.2.5, the tiny CUDA test and display/idle checks passed. I’m keeping that separate from the older bounded test rather than claiming every workload was repeated on every kernel.
+
+  These are functional checks, not a claim that long gaming sessions or large model workloads have been fully stress-tested.
+
+  An external monitor isn’t required for CUDA, either. The 4090 can do the computation while the AMD GPU handles the laptop screen.
+
+  ## Getting external video output working
+
+  Once the compute path was working, we loaded the matching proprietary display modules:
+
+  nvidia-modeset.ko
+  nvidia-drm.ko
+
+  The tested DRM settings were:
+
+  modeset=1
+  fbdev=0
+
+  External HDMI output then worked, including 3840×1600, while the internal AMD display remained available.
+
+  Each kernel has its own matching module build. An Arch module isn’t interchangeable with a CachyOS module just because both report NVIDIA 615.71.09.
+
+  The working deployment keeps these private builds under /opt/gpd-egpu/ and loads them through guarded helpers. It doesn’t overwrite stock kernel modules or rely on loading whichever NVIDIA module happens to
+  be found first.
+
+  ## Automatic connection and startup
+
+  The initial tests were deliberately manual. Once they passed, we added a systemd/udev integration for:
+
+  - Booting with the enclosure connected
+  - Connecting it after login
+  - Restarting the driver after a recorded safe disconnect
+
+  The helper checks the running kernel, module identities, live parameters, PCI readability and power policy.
+
+  There’s also a failure marker to prevent an interrupted initialization from turning into an automatic retry loop.
+
+  Early versions still contained the diagnostic 60-second waits, which made startup unnecessarily slow. Those waits were removed from normal activation after testing; the immediate checks stayed.
+
+  Automatic startup and connection now work on both supported kernels.
+
+  ## Disconnecting was a separate problem
+
+  This was the part where “the GPU works” definitely did not mean “everything works.”
+
+  Pulling the USB4 cable while NVIDIA’s display stack was active froze the desktop and required a forced shutdown.
+
+  The working planned-disconnect sequence is:
+
+  1. Check which processes hold NVIDIA/DRM device handles.
+  2. Refuse to proceed if ordinary GPU applications are still using it.
+  3. Temporarily stop LACT if it holds the GPU.
+  4. Send a synthetic removal notification for the NVIDIA DRM nodes so desktop clients release them.
+  5. Wait for those handles to close.
+  6. Normally unload:
+      - nvidia_drm
+      - nvidia_modeset
+      - nvidia_uvm
+      - nvidia
+
+  7. Only then report READY TO UNPLUG.
+
+  The synthetic notification is not a PCI remove, reset or rescan. The hardware stays connected while the desktop releases it.
+
+  There’s no forced module unload. If clients or module references remain, it stops and tells me to keep the cable connected.
+
+  This is exposed through a KDE tray icon with a left-click menu. Authorization is scoped to the specific disconnect helper, so it doesn’t ask for my sudo password every time.
+
+  After a clean eject and physical disconnect, the internal desktop stays usable. Reconnecting automatically brings the eGPU and external display back. That cycle has worked on both Arch and CachyOS 7.2.5.
+
+  ## The LACT wrinkle
+
+  LACT needs to release the GPU before unloading NVIDIA, so the eject helper may stop lactd.service.
+
+  Originally, reconnect left LACT paused. Opening the GUI then showed:
+
+  Service Status: inactive
+  Connection Status: not connected
+
+  It could still show both GPUs because it was running in standalone monitoring mode. “Not connected” referred to the LACT daemon, not the eGPU.
+
+  A follow-up change has been prepared to restart LACT only after successful reconnect and only if that same eject cycle recorded that our helper stopped it.
+
+  That change has passed unit tests, but I haven’t confirmed its live lifecycle testing yet, so I’m not listing it as fully validated.
+
+  ## There is still an intermittent reboot hang
+
+  I’ve had several successful reboots, but one reboot after multiple disconnect/reconnect cycles hung.
+
+  The logs showed:
+
+  System is rebooting
+  PCIe Link Down
+  NVRM: Xid 79: GPU has fallen off the bus
+
+  That was followed by DRM framebuffer-cleanup warnings and repeated:
+
+  nvidia-modeset: ERROR: GPU:0:
+  Error while waiting for GPU progress
+
+  Plasma components then timed out while stopping.
+
+  The GPU link went down roughly 1.4 seconds after reboot began. Earlier eject cycles had also produced flip-event timeout warnings even though reconnect subsequently worked.
+
+  So this is still an unresolved display/device-teardown issue. The logs don’t establish why the link dropped, whether physical cable movement was involved, or whether repeated cycles caused it.
+
+  For now, my precaution is to safe-eject, wait for READY TO UNPLUG, physically disconnect, and then reboot.
+
+  ## A few failures were our own scripts, not the hardware
+
+  Worth mentioning these because otherwise the troubleshooting story makes the platform look worse than the evidence supports:
+
+  - A broad nvidia*.ko* check falsely flagged the stock kernel’s legitimate nvidia-wmi-ec-backlight module.
+  - Requiring the GPU to enumerate before applying the root-port power fix created a circular dependency.
+  - Requiring the USB4 udev rule inside the initramfs was unnecessary.
+  - A CUDA child script initially rejected its new trial-directory path before running any CUDA work.
+  - A loader check unnecessarily tied Arch activation to the installed CachyOS kernel version.
+  - An archive operation failed because /var/lib and /root were on different filesystems.
+
+  Those were corrected conservatively rather than “fixed” by deleting stock modules or weakening every check.
+
+  We also had a separate Limine boot-image checksum mismatch during the earlier work. That was repaired by correcting the relevant checksum fields after measuring the actual files. Later updates explicitly
+  verified boot-image checksums and preserved a recovery snapshot and boot backup.
+
+  ## What I’d take away from this
+
+  For this GZ302EA + JHL9480 + RTX 4090 combination, the practical working recipe is:
+
+  - BIOS 314
+  - Exact-kernel proprietary NVIDIA 615.71.09
+  - NVreg_EnableGpuFirmware=0
+  - Genuine live DynamicPowerManagement: 0
+  - Both USB4 root ports pinned awake
+  - NVIDIA display and HDA functions pinned awake
+  - Matching UVM/modeset/DRM modules
+  - Controlled driver loading
+  - Proper client release and normal driver unload before unplugging
+
+  We did not need blanket pcie_aspm=off, forced PCIe link speeds, PCI rescan loops or Thunderbolt controller rebinding for the successful setup.
+
+  CUDA, video output, automatic connection and tray-assisted disconnect/reconnect are working. Seamless surprise unplug and completely reliable shutdown with the active eGPU are not solved.
+
+  I’ve put together a sharing folder with the helper/tray source, build instructions, module hashes, validation notes and rollback information. The public source archive excludes machine-specific driver
+  binaries and raw private logs. It’s a reference implementation for adapting carefully—not a universal “run this as root” installer.
+
+  Credit to the eGPU-Blackwell-Stability project for the platform power-management direction, and to everyone documenting these USB4/eGPU issues. Hopefully this gives the next person with a Flow Z13 and a 4090
+  a much shorter route to a usable setup.

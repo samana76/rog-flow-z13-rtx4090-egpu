@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+"""Experimental controlled eject: release DRM users before normal module unload.
+
+Never removes a PCI device or unbinds a controller. Never forces an unload.
+"""
+import datetime
+import fcntl
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+import sys
+import time
+
+MODULES=('nvidia_drm','nvidia_modeset','nvidia_uvm','nvidia')
+BASE=Path('/var/lib/gpd-egpu-eject')
+
+def check(ok,message):
+    if not ok:raise RuntimeError(message)
+
+def valid_config(data):
+    check(len(data)>=16,'PCI config inaccessible or short')
+    check(not all(x==255 for x in data) and data[:2] not in (b'\xff\xff',b'\0\0') and data[14]&127!=127,'Hardware/tunnel failure: PCI config invalid; no recovery')
+
+def pci(p):
+    with (p/'config').open('rb',buffering=0) as f:valid_config(f.read(64))
+
+def node_ids(nodes):
+    ids=set()
+    for p in nodes:
+        try:
+            s=p.stat()
+            if stat.S_ISCHR(s.st_mode):ids.add(s.st_rdev)
+        except FileNotFoundError:pass
+    return ids
+
+def clients(ids):
+    result=[]
+    for proc in Path('/proc').iterdir():
+        if not proc.name.isdecimal():continue
+        try:
+            for fd in (proc/'fd').iterdir():
+                try:
+                    s=fd.stat()
+                    if stat.S_ISCHR(s.st_mode) and s.st_rdev in ids:
+                        result.append({'pid':int(proc.name),'name':(proc/'comm').read_text().strip(),
+                                       'uid':proc.stat().st_uid,'exe':str((proc/'exe').resolve()),
+                                       'device':str(fd.resolve()),'device_number':[os.major(s.st_rdev),os.minor(s.st_rdev)]});break
+                except FileNotFoundError:pass
+        except FileNotFoundError:pass
+        except PermissionError:raise RuntimeError('Cannot inspect all GPU clients; refusing unload')
+    return result
+
+def session_holder(p):
+    expected={'kwin_wayland':('/usr/bin/kwin_wayland',1000),
+              'Xwayland':('/usr/bin/Xwayland',1000),
+              'systemd-logind':('/usr/lib/systemd/systemd-logind',0),
+              'systemd':('/usr/lib/systemd/systemd',0)}
+    return (p.get('exe'),p.get('uid'))==expected.get(p['name'],('never',-1)) and (p['name']!='systemd' or p['pid']==1)
+
+def classify_clients(found,allow_kwin=False):
+    check(not [p for p in found if not allow_kwin or not session_holder(p)],
+          'GPU still used by '+json.dumps(found)+'; close applications, keep cable connected')
+
+def supported_kernel(kernel):
+    return kernel in ('7.2.4-arch1-2','7.2.5-1-cachyos')
+
+def main():
+    check(os.geteuid()==0,'This action needs its graphical administrator authorization')
+    check(not sys.argv[1:],'No arguments accepted')
+    os.umask(0o077)
+    lock=open('/run/lock/gpd-egpu-loader.lock','a')
+    fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    boot=Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+    root=BASE/boot
+    check(not root.exists(),'An eject was already attempted this boot; review its record, no automatic retry')
+    check(supported_kernel(os.uname().release),'Unsupported kernel for controlled eject')
+    check('GZ302EA' in Path('/sys/class/dmi/id/product_name').read_text(),'Wrong machine')
+    check(Path('/sys/class/dmi/id/bios_version').read_text().strip()=='GZ302EA.314','BIOS changed')
+    gpus=[p for p in Path('/sys/bus/pci/devices').iterdir() if (p/'vendor').read_text().strip()=='0x10de' and (p/'class').read_text().strip().startswith('0x03')]
+    check(len(gpus)==1,'Exactly one connected NVIDIA display GPU required')
+    gpu=gpus[0];parent=Path('/sys/bus/pci/devices')/gpu.resolve().parent.name
+    check((gpu/'device').read_text().strip()=='0x2684','Wrong GPU')
+    check((parent/'vendor').read_text().strip()=='0x8086' and (parent/'device').read_text().strip()=='0x5786','Wrong bridge')
+    pci(parent);pci(gpu)
+    panels=[p for p in Path('/sys/class/drm').glob('card*-eDP-*') if (p/'enabled').read_text().strip()=='enabled' and (p.parent/p.name.split('-')[0]/'device/vendor').read_text().strip()=='0x1002']
+    check(panels,'Internal AMD panel must already be enabled')
+    params=Path('/proc/driver/nvidia/params').read_text()
+    for key in ('DynamicPowerManagement','EnableGpuFirmware'):
+        check(re.findall(r'^'+key+r':\s*(\S+)\s*$',params,re.M)==['0'],'Working core options changed')
+    for name,value in [('nvidia','329D97755EFA31D5314E8F0'),('nvidia_uvm','064C13389A454AA4AAF638E'),('nvidia_modeset','C86CA92D8E48780F19CB46E'),('nvidia_drm','E22EBDCD6BCC5889463CFBF')]:
+        check(Path('/sys/module',name,'srcversion').read_text().strip()==value,'Loaded build differs: '+name)
+    gate=Path('/etc/modprobe.d/zzz-gpd-egpu-controlled-load.conf').read_text().splitlines()
+    for name in (*MODULES,'nvidia_peermem','nouveau'):
+        check('install '+name+' /usr/bin/false' in gate,'Automatic module blocking missing')
+    drm=[p for p in Path('/sys/class/drm').iterdir() if re.fullmatch(r'(card\d+|renderD\d+)',p.name) and (p/'device').resolve()==gpu.resolve()]
+    check(any(p.name.startswith('card') for p in drm) and any(p.name.startswith('render') for p in drm),'Missing GPU DRM nodes')
+    nodes=[Path('/dev/dri')/p.name for p in drm]+list(Path('/dev').glob('nvidia*'))+list(Path('/dev/nvidia-caps').glob('*'))
+    ids=node_ids(nodes)
+    check(ids,'No NVIDIA device numbers found')
+    found=clients(ids)
+    prelogs=Path('/var/log/egpu-autoconfig/eject-preflight')
+    prelogs.mkdir(parents=True,exist_ok=True)
+    (prelogs/(str(time.time_ns())+'.json')).write_text(json.dumps({'boot':boot,'clients':found},indent=2))
+    lact_status=subprocess.run(['/usr/bin/systemctl','show','lactd.service','--property=MainPID','--value'],capture_output=True,text=True,timeout=10)
+    check(lact_status.returncode==0,'Cannot inspect LACT service')
+    lact_pid=int(lact_status.stdout.strip() or '0')
+    lact_clients=[p for p in found if p['pid']==lact_pid and p.get('uid')==0 and p.get('exe')=='/usr/bin/lact']
+    classify_clients([p for p in found if p not in lact_clients],allow_kwin=True)
+    root.mkdir(parents=True,mode=0o700)
+    log=(root/'operations.log').open('a',buffering=1)
+    record={'boot':boot,'gpu':gpu.name,'parent':parent.name,'drm':[p.name for p in drm],'stage':'preflight-complete'}
+    def note(text):
+        line=datetime.datetime.now(datetime.timezone.utc).isoformat()+' '+text
+        print(line,flush=True);log.write(line+'\n');log.flush();os.fsync(log.fileno())
+    def checkpoint(stage):
+        record['stage']=stage
+        with (root/'state.json').open('w') as f:json.dump(record,f,indent=2);f.flush();os.fsync(f.fileno())
+        note(stage)
+    def run(args):
+        note(repr(args));r=subprocess.run(args,capture_output=True,text=True,timeout=20)
+        note(r.stdout+r.stderr);check(r.returncode==0,'Command failed; keep cable connected')
+    lact_paused=False
+    unloaded=False
+    try:
+        if lact_clients:
+            checkpoint('before-temporary-lact-stop')
+            run(['/usr/bin/systemctl','stop','lactd.service'])
+            lact_paused=True;record['lact_paused']=True
+            classify_clients(clients(ids),allow_kwin=True)
+        checkpoint('before-userspace-drm-release')
+        config=Path('/home/EGPU_USER/.config/kwinoutputconfig.json')
+        if config.exists():(root/'kwinoutputconfig.before').write_bytes(config.read_bytes())
+        # Synthetic notification only, scoped to this GPU's DRM nodes. This is NOT
+        # a write to PCI remove/reset/rescan; hardware stays connected and bound.
+        for p in drm:
+            pci(parent);pci(gpu)
+            note('NOTIFY DRM userspace removal: '+str(p/'uevent'))
+            with (p/'uevent').open('w') as f:f.write('remove\n')
+        end=time.monotonic()+15
+        while True:
+            found=clients(ids)
+            if not found:break
+            if time.monotonic()>=end:
+                record['remaining_clients']=found
+                classify_clients(found)
+            time.sleep(.5)
+        checkpoint('all-gpu-clients-released')
+        for name in MODULES:
+            pci(parent);pci(gpu)
+            classify_clients(clients(ids))
+            p=Path('/sys/module')/name
+            check(not list((p/'holders').iterdir()) and (p/'refcnt').read_text().strip()=='0','Module still referenced: '+name+'; no force-unload')
+            checkpoint('before-normal-unload-'+name)
+            unloaded=True
+            run(['/usr/bin/rmmod',name])
+            check(not p.exists(),'Module remained loaded: '+name)
+        pci(parent);pci(gpu)
+        checkpoint('all-nvidia-modules-unloaded')
+        note('READY TO UNPLUG: all NVIDIA modules unloaded normally; internal panel remains available. LACT remains paused until next reboot to avoid reopening the GPU before physical removal. This is not yet a proven reconnect cycle.')
+    except Exception as e:
+        record['error']=str(e);checkpoint('failed-do-not-unplug')
+        note('DO NOT UNPLUG. No forced unload, PCI recovery or automatic retry. '+str(e))
+        if lact_paused and not unloaded:
+            try:
+                pci(parent);pci(gpu)
+                run(['/usr/bin/systemctl','start','lactd.service'])
+                record['lact_paused']=False;checkpoint('failed-lact-restored-do-not-unplug')
+            except Exception as restore_error:
+                note('LACT restoration not completed; retain cable and reboot normally before further testing: '+str(restore_error))
+        raise
+    finally:log.close()
+
+if __name__=='__main__':
+    try:main()
+    except Exception as e:print('NOT READY TO UNPLUG: '+str(e),file=sys.stderr);raise SystemExit(1)

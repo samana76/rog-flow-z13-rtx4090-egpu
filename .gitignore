@@ -1,0 +1,7 @@
+local-tested-driver/
+__pycache__/
+*.py[cod]
+*.ko
+*.ko.*
+*.so
+*.so.*

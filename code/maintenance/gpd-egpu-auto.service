@@ -1,0 +1,15 @@
+[Unit]
+Description=GPD eGPU automatic first activation with crash lockout
+After=systemd-udev-trigger.service display-manager.service
+ConditionPathExists=!/var/lib/gpd-egpu-auto/initializing-or-failed.json
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/gpd-egpu/auto/auto-start.py
+TimeoutStartSec=600
+Restart=no
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
