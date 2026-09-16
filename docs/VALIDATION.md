@@ -50,3 +50,7 @@ These checks do not install the redacted code, run CUDA, change drivers, exercis
 The bundle now carries10 exact module artifacts: four Arch7.2.4, two historical CachyOS7.2.4, four CachyOS7.2.5. All hashes checked. All Python sources compile;22 bundled regression tests pass, including six tests of pending LACT restoration. Earlier test imports referenced retired workspace paths; imports now resolve bundled code. No GPU workloads, installs or service actions were performed during this refresh.
 
 See [the update](SEPTEMBER-14-UPDATE.md) for successful new-kernel CUDA/display/clean-cycle evidence and the intermittent reboot failure. LACT installation/live validation remains unconfirmed. Historical milestones above refer to their original kernel versions.
+
+## September 15 regression update
+
+All 27 bundled tests pass, including five new package-query tests. Startup repair was live-verified on Arch; Blender enumerated RTX 4090 CUDA/OptiX and the owner confirmed restored operation. See [incident details](SEPTEMBER-15-PACKAGE-QUERY-FIX.md).

@@ -6,6 +6,8 @@ The successful driver is **NVIDIA's unpatched proprietary 615.71.09**, built for
 
 Updated September 14: dual-kernel integration is deployed; conditional LACT restoration is included separately as staged, not live-confirmed.
 
+Latest fix: September 15 package-query warnings no longer masquerade as a driver-version mismatch. The owner confirmed recovery; NVIDIA activation and Blender CUDA/OptiX enumeration were verified. [Details and regression coverage](docs/SEPTEMBER-15-PACKAGE-QUERY-FIX.md).
+
 Start with:
 
 - [September 14 changes, upgrade procedure and reboot-failure evidence](docs/SEPTEMBER-14-UPDATE.md)

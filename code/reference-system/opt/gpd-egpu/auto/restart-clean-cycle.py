@@ -13,8 +13,8 @@ import time
 
 sys.dont_write_bytecode=True
 EXPECTED={
- '/opt/gpd-egpu/615.71.09/loader.py':'1258e233f5e109b811f340c35ec9dc1c2900a6c1f46cf0e3c1e731008d582404',
- '/opt/gpd-egpu/display-extension/display-start.py':'c6f6237b172b7f8ace66387b521b6bf913842d04d8c24bd89ac0150336fd06fd',
+ '/opt/gpd-egpu/615.71.09/loader.py':'7ebe0c14b6335970b80e3bb7dfaa1d7d4afa4ba4ab669ef76eee98d73dd14ead',
+ '/opt/gpd-egpu/display-extension/display-start.py':'fbdf8cd6ca3ad3aab261cd3176f816422e5f3a50f2a795a7823ca4873ccff370',
  '/usr/local/sbin/gpd-egpu-start':'68c09c249104918c84ed27b7f5514f02c22737d0381ce54f28208bfd079e0245',
  '/usr/local/libexec/gpd-egpu-eject':'5f6bfc8d267f6818a81c5834534164c069e33bb3c3156c6415316caba1984fde',
 }

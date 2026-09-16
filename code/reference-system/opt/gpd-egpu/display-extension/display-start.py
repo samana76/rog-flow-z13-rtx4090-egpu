@@ -33,7 +33,7 @@ def main():
     lock = open('/run/lock/gpd-egpu-loader.lock','a')
     fcntl.flock(lock,fcntl.LOCK_EX | fcntl.LOCK_NB)
     source = Path('/opt/gpd-egpu/615.71.09/loader.py')
-    if hashlib.sha256(source.read_bytes()).hexdigest() != '1258e233f5e109b811f340c35ec9dc1c2900a6c1f46cf0e3c1e731008d582404':
+    if hashlib.sha256(source.read_bytes()).hexdigest() != '7ebe0c14b6335970b80e3bb7dfaa1d7d4afa4ba4ab669ef76eee98d73dd14ead':
         raise SystemExit('Installed compute loader changed; stop for review')
     l = load(source); m = l.guard()
     m.PRIVATE = STATE

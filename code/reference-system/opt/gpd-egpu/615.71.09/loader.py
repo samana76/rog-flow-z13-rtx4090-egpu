@@ -63,6 +63,17 @@ def required_packages(kernel):
         raise RuntimeError('Unsupported running kernel; build and validate its modules first')
     return [('nvidia-utils', '615.71.09-1'), kernel_packages[kernel]]
 
+def query_package(t, name):
+    import subprocess
+    t.log('Package identity query: '+name)
+    result = subprocess.run(['pacman','-Q',name], capture_output=True, text=True, timeout=30)
+    t.log('pacman stdout: '+result.stdout.strip())
+    if result.stderr:
+        t.log('pacman stderr: '+result.stderr.strip())
+    if result.returncode != 0:
+        raise RuntimeError('Package query failed: '+name)
+    return result.stdout.strip()
+
 def identity(t, m):
     m.require(os.uname().release in BUILDS, 'Unsupported kernel')
     m.require('GZ302EA' in t.read('/sys/class/dmi/id/product_name'), 'Wrong laptop')
@@ -71,7 +82,7 @@ def identity(t, m):
     m.require('amdgpu.dcdebugmask=0x40600' in cmd.split(), 'AMD command line changed')
     m.require(not any(s in cmd for s in ('pcie_aspm=off','pcie_ports=native','pci=realloc','thunderbolt.host_reset=0','thunderbolt.host_reset=false')), 'Unexpected PCI/USB4 command line')
     for name, version in required_packages(os.uname().release):
-        m.require(t.run(['pacman','-Q',name]).strip() == name+' '+version, 'Kernel/driver package changed; private modules need review/rebuild')
+        m.require(query_package(t, name) == name+' '+version, 'Kernel/driver package changed; private modules need review/rebuild')
     for name, expected in [('nvidia.ko',CORE),('nvidia-uvm.ko',UVM)]:
         m.require(m.digest(ROOT/name) == expected, 'Module file changed: '+name)
         m.require(t.run(['modinfo','-F','vermagic',str(ROOT/name)]).split()[0] == KERNEL, 'Module kernel mismatch')

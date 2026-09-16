@@ -8,23 +8,23 @@
   },
   {
     "file": "code/reference-system/opt/gpd-egpu/615.71.09/loader.py",
-    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
-    "source_sha256": "1258e233f5e109b811f340c35ec9dc1c2900a6c1f46cf0e3c1e731008d582404",
-    "bundled_sha256": "1258e233f5e109b811f340c35ec9dc1c2900a6c1f46cf0e3c1e731008d582404",
+    "source": "September 15 tested package-query correction applied to confirmed dual-kernel reference payload; optional LACT restoration remains separately documented",
+    "source_sha256": "7ebe0c14b6335970b80e3bb7dfaa1d7d4afa4ba4ab669ef76eee98d73dd14ead",
+    "bundled_sha256": "7ebe0c14b6335970b80e3bb7dfaa1d7d4afa4ba4ab669ef76eee98d73dd14ead",
     "redaction": "account name replaced with EGPU_USER"
   },
   {
     "file": "code/reference-system/opt/gpd-egpu/display-extension/display-start.py",
-    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
-    "source_sha256": "c6f6237b172b7f8ace66387b521b6bf913842d04d8c24bd89ac0150336fd06fd",
-    "bundled_sha256": "7dbf4c3923ebb42402476fcfc2cf67be2fa357d2a6917d61ea694027ae2492d6",
+    "source": "September 15 tested package-query correction applied to confirmed dual-kernel reference payload; optional LACT restoration remains separately documented",
+    "source_sha256": "fbdf8cd6ca3ad3aab261cd3176f816422e5f3a50f2a795a7823ca4873ccff370",
+    "bundled_sha256": "313b8f210dd803678424cadfa7e1c63c9af7415b9f15451f8663f202cbdf3bf7",
     "redaction": "account name replaced with EGPU_USER"
   },
   {
     "file": "code/reference-system/opt/gpd-egpu/auto/restart-clean-cycle.py",
-    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
-    "source_sha256": "e728f950fa4d0fced0bdd02e0a416e9b2fac3e4b3a1fcee01f44e91669c15aec",
-    "bundled_sha256": "051572e77caea850ca4cc0c74a55533a0c95f99e6315ab2b4707b24e01adf16e",
+    "source": "September 15 tested package-query correction applied to confirmed dual-kernel reference payload; optional LACT restoration remains separately documented",
+    "source_sha256": "a7e4b2adcdd3bf8dd8ac0fb458fdd9f22ea113d07e24ba69c622f635b772756c",
+    "bundled_sha256": "3ad714b12ee69f4e37dc741988b9df4bd9799026c752ff67822839fb30b6035e",
     "redaction": "account name replaced with EGPU_USER"
   },
   {
@@ -94,14 +94,14 @@
     "file": "tests/test_clean_reconnect.py",
     "source": "/home/EGPU_USER/egpu-staged/working-loader/test_clean_reconnect.py",
     "source_sha256": "cb7b3dde3d2e235747bdd40c9083e2bbc594020578651b4eb65ea70b1a4c81ed",
-    "bundled_sha256": "1862d553536ac7e82c278834f33463363106da26abb51b0bc1822e94582c98d1",
+    "bundled_sha256": "1f0f95c803fd085b82e29654151dbf09881ec6e8d2a6496e13701b90799d0fce",
     "redaction": "account name replaced with EGPU_USER"
   },
   {
     "file": "tests/test_eject.py",
     "source": "/home/EGPU_USER/egpu-staged/working-loader/test_eject.py",
     "source_sha256": "7b9d446f793ac3ab30a45e737177b469b3493fbc30d82b5269bc1fecd1382f68",
-    "bundled_sha256": "e8d9162e1e1839055892557dc1d0ec2a32b674f756ea3bc1c5dc52da0ad3a950",
+    "bundled_sha256": "5d65de79d59d801be5a3b6d207dc93bd102f8f20790d8e074095e1c600ba2b4c",
     "redaction": "account name replaced with EGPU_USER"
   },
   {

@@ -53,3 +53,7 @@ Do not replace the installed production scripts with these redacted references w
 The older `maintenance/` installers remain historical and can contain superseded kernel guards. Do not use them to overwrite the latest reference implementation. Every layered rollback must run in reverse installation order.
 
 Run bundle regression tests with `python3 -m unittest discover -s tests`. They import guarded functions only; they do not initialize a GPU.
+
+## September 15 package-query fix
+
+The current reference loader captures pacman stdout and stderr separately for package identity checks, retaining exit-code and exact-version validation. Display and reconnect hash dependencies were updated together. See the incident report in `docs/SEPTEMBER-15-PACKAGE-QUERY-FIX.md`. Historical installers and the older `pending-lact/` installer retain their historical baselines; do not run them over the updated reference. Integrating LACT restoration must preserve the new loader/display hash pins. The tested private repair is not distributed as a universal unlock utility: its permission to archive a lockout was specific to the reviewed pre-initialization failure.
