@@ -4,7 +4,7 @@ Field report from September 2026: **CUDA, NVIDIA external display output, automa
 
 The successful driver is **NVIDIA's unpatched proprietary 615.71.09**, built for the exact running kernel, with `NVreg_EnableGpuFirmware=0` and `NVreg_DynamicPowerManagement=0`. We did not write a new NVIDIA driver. The custom work is the guarded loading, power-policy checks, automatic reconnect, safe disconnect helper, and KDE tray integration. Experimental patches are not part of the successful driver.
 
-Updated September 14: dual-kernel integration is deployed; conditional LACT restoration is included separately as staged, not live-confirmed.
+Updated September 15: automatic kernel-update support, registry-based full display startup, conditional LACT restoration and live tray GPU/power readings are included. [Latest changes and validation limits](docs/SEPTEMBER-15-UPDATES-AND-TELEMETRY.md).
 
 Latest fix: September 15 package-query warnings no longer masquerade as a driver-version mismatch. The owner confirmed recovery; NVIDIA activation and Blender CUDA/OptiX enumeration were verified. [Details and regression coverage](docs/SEPTEMBER-15-PACKAGE-QUERY-FIX.md).
 
@@ -27,7 +27,7 @@ Start with:
 | Enclosure | GPD TBT5-EGPU |
 | PCI bridge | Intel JHL9480, `8086:5786` |
 | GPU | NVIDIA RTX 4090 AD102 / Ada, `10de:2684` |
-| Preferred kernel | Arch `7.2.4-arch1-2` (`linux 7.2.4.arch1-2`) |
+| Preferred kernel | Arch `7.2.6-arch2-1` (previously `7.2.4-arch1-2`) |
 | Current CachyOS kernel | `7.2.5-1-cachyos` |
 | Historical CachyOS compute tests | `7.2.4-1-cachyos` |
 | Userspace | `nvidia-utils 615.71.09-1` |
@@ -39,15 +39,15 @@ Start with:
 | Capability | Evidence |
 |---|---|
 | Core initialization and NVML | Passed on Arch and CachyOS, including 60-second idle checks |
-| Tiny CUDA kernel | 256 results verified on Arch7.2.4 and CachyOS7.2.4/7.2.5 |
+| Tiny CUDA kernel | 256 results verified on Arch7.2.4/7.2.6 and CachyOS7.2.4/7.2.5 |
 | Bounded CUDA transfers/kernel work | 60 rounds of 64-MiB transfers/launches, followed by 60 seconds idle, passed on Arch7.2.4 and historical CachyOS7.2.4; not repeated on7.2.5 |
-| RTX 4090 external monitor | Confirmed on Arch7.2.4 and CachyOS7.2.5 |
+| RTX 4090 external monitor | Confirmed on Arch7.2.4/7.2.6 and CachyOS7.2.5 |
 | Boot with enclosure connected | User confirmed external display activates automatically |
 | Clean disconnect | User confirmed internal desktop survives physical removal after normal driver unload |
 | Reconnect after clean eject | User confirmed automatic activation; also manually validated same-boot restart |
 | Tray, left-click menu, no separate app needed | User confirmed native KDE menu works |
 | Reboot with active eGPU after multiple cycles | Intermittent failure: link loss, Xid79 and display teardown hang; not solved |
-| Conditional LACT restoration | Staged code, six unit tests passed; live validation pending |
+| Conditional LACT restoration | Included in deployed reconnect helper; restores only when clean eject previously paused LACT |
 | Surprise unplug while driver/display active | **Failed: desktop freeze requiring forced shutdown** |
 | Sustained model/gaming workloads, suspend/resume, arbitrary kernel upgrades | Not established by these tests |
 

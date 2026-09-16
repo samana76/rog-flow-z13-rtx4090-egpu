@@ -1,0 +1,13 @@
+{
+  "registry.py": "524499d9ee094d98023cdd63d1461dc1ea0989612be929d9f458869d647125b3",
+  "loader.py": "b007d38f73b42387fe23e81d0228e6135ecdb194aaf570cbf2e40b184e51a868",
+  "display-start.py": "12158c548aa238800c0f8411816473ef7bb4969141f5b4292a4afc9a786899db",
+  "gpd-egpu-eject": "53b3974d377c556c194db65392e31c4f907aded94aa86b017717c0dbb311140f",
+  "restart-clean-cycle.py": "1e15fc3ea30c868320e9f1cf557c9246dc75a48bd7494eec8e306d518037986b",
+  "auto-start.py": "cca402c448312970e698960e5941dbe6a5b68a88d0e34f26ddd93cd68b4219a0",
+  "registry.json": "6d87e8515215edcae4ead9f7ac4f0a23d3f6e2b3c97a96691e9138932cb5a4a4",
+  "changes.json": "f2035833ff6ed0f69d2f936fd3b1d81a5bc0fb52dc31f826901cffb86ce06e6d",
+  "update.py": "27bff02cc70c93ac96fe535ada0c4559bb85ee8c72fac8782abbe2f67e278730",
+  "00-gpd-egpu-update-pre.hook": "6396d0015f1757f9c9ebcac9218e42d2c628bca381f87c4a129fd98178f7a819",
+  "zz-gpd-egpu-update-post.hook": "f3c9fb50ba855443e8b8f8ba6ef6ee13fc2f2bf83d07adebfd5d264a77786775"
+}

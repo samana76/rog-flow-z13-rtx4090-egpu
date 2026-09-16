@@ -9,7 +9,8 @@ B=Path(__file__).resolve().parent
 from importlib.machinery import SourceFileLoader
 path=B.parent/'code/reference-system/usr/local/libexec/gpd-egpu-eject'
 spec=importlib.util.spec_from_loader('eject',SourceFileLoader('eject',str(path)))
-e=importlib.util.module_from_spec(spec);spec.loader.exec_module(e)
+from reference_fixture import load
+e=load(path)
 
 class Tests(unittest.TestCase):
     def test_invalid_pci(self):

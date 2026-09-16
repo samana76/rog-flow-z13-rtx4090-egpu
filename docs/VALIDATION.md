@@ -54,3 +54,7 @@ See [the update](SEPTEMBER-14-UPDATE.md) for successful new-kernel CUDA/display/
 ## September 15 regression update
 
 All 27 bundled tests pass, including five new package-query tests. Startup repair was live-verified on Arch; Blender enumerated RTX 4090 CUDA/OptiX and the owner confirmed restored operation. See [incident details](SEPTEMBER-15-PACKAGE-QUERY-FIX.md).
+
+## September 15, Arch 7.2.6 and tray telemetry
+
+The sensitive update hooks completed; the first boot revealed an old kernel-name dispatch bug that left only core/UVM loaded. After the registry dispatch correction, all four modules loaded, LACT initialized both GPUs, HDMI was enabled through Plasma, and 256 CUDA results passed. The owner reported working operation. Cold-boot activation after the correction and a separately documented physical reconnect cycle remain unconfirmed. A live tray menu test showed GPU utilization and power. Latest portable checks: 27 bundle unittest cases, 34 update-support cases (private inventory test omitted), 3 original tray cases, plus the telemetry parsing/eject-order assertions. See [details](SEPTEMBER-15-UPDATES-AND-TELEMETRY.md).

@@ -1,0 +1,37 @@
+[
+  {
+    "path": "/opt/gpd-egpu/615.71.09/loader.py",
+    "source": "loader.py",
+    "before": "7ebe0c14b6335970b80e3bb7dfaa1d7d4afa4ba4ab669ef76eee98d73dd14ead",
+    "after": "b007d38f73b42387fe23e81d0228e6135ecdb194aaf570cbf2e40b184e51a868",
+    "mode": 420
+  },
+  {
+    "path": "/opt/gpd-egpu/display-extension/display-start.py",
+    "source": "display-start.py",
+    "before": "fbdf8cd6ca3ad3aab261cd3176f816422e5f3a50f2a795a7823ca4873ccff370",
+    "after": "12158c548aa238800c0f8411816473ef7bb4969141f5b4292a4afc9a786899db",
+    "mode": 420
+  },
+  {
+    "path": "/usr/local/libexec/gpd-egpu-eject",
+    "source": "gpd-egpu-eject",
+    "before": "5f6bfc8d267f6818a81c5834534164c069e33bb3c3156c6415316caba1984fde",
+    "after": "53b3974d377c556c194db65392e31c4f907aded94aa86b017717c0dbb311140f",
+    "mode": 493
+  },
+  {
+    "path": "/opt/gpd-egpu/auto/restart-clean-cycle.py",
+    "source": "restart-clean-cycle.py",
+    "before": "9a1266fe96bd2e2342fb1878a7ac083f7f189758dc97684ef0e5d582002c946c",
+    "after": "1e15fc3ea30c868320e9f1cf557c9246dc75a48bd7494eec8e306d518037986b",
+    "mode": 420
+  },
+  {
+    "path": "/opt/gpd-egpu/auto/auto-start.py",
+    "source": "auto-start.py",
+    "before": "800c1c117ab634ad560022c5d54c53c9d66f6334536dc9b6853609b2a548b2fc",
+    "after": "cca402c448312970e698960e5941dbe6a5b68a88d0e34f26ddd93cd68b4219a0",
+    "mode": 420
+  }
+]

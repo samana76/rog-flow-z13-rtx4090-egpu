@@ -15,7 +15,7 @@ sys.dont_write_bytecode=True
 EXPECTED={
  '/opt/gpd-egpu/615.71.09/loader.py':'b007d38f73b42387fe23e81d0228e6135ecdb194aaf570cbf2e40b184e51a868',
  '/opt/gpd-egpu/display-extension/display-start.py':'12158c548aa238800c0f8411816473ef7bb4969141f5b4292a4afc9a786899db',
- '/usr/local/sbin/gpd-egpu-start':'79eed7c629e3be98c912d43a0ae4c5eb27334a5c12a386983f6319ebbf97faa7',
+ '/usr/local/sbin/gpd-egpu-start':'68c09c249104918c84ed27b7f5514f02c22737d0381ce54f28208bfd079e0245',
  '/usr/local/libexec/gpd-egpu-eject':'53b3974d377c556c194db65392e31c4f907aded94aa86b017717c0dbb311140f',
 }
 

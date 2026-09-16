@@ -9,7 +9,7 @@
 - `opt/gpd-egpu/display-extension/display-start.py`: kernel-specific Arch/CachyOS modeset/DRM startup.
 - `opt/gpd-egpu/auto/auto-start.py`: boot/add activation and persistent failure lockout.
 - `opt/gpd-egpu/auto/restart-clean-cycle.py`: restart only after verified clean eject.
-- `usr/local/sbin/gpd-egpu-start`: dual-kernel dispatch wrapper.
+- `usr/local/sbin/gpd-egpu-start`: registry-based full compute/display dispatch wrapper.
 - `usr/local/libexec/gpd-egpu-eject`: root-owned, no-arguments clean eject helper.
 
 `maintenance/` contains the activation unit/rule, password-free authorization reference and selected maintenance code. `tray/` contains the **current** Python/native-KDE tray implementation. `historical-validation/` includes CUDA child kernels and the historical Arch build script, whose original protected trial-directory assumptions are retained for review.
@@ -48,7 +48,7 @@ Do not replace the installed production scripts with these redacted references w
 
 ## September14 code additions
 
-`update-reference/` contains machine-specific installers for CachyOS integration, including the corrected same-filesystem history archive and partial-state resumption. These are deployment records, not generic installers. `pending-lact/` contains the proposed reconnect helper and installer that conditionally restore LACT; they are deliberately separate from the last confirmed deployed `reference-system/` code.
+`update-reference/` contains machine-specific installers for CachyOS integration, including the corrected same-filesystem history archive and partial-state resumption. These are deployment records, not generic installers. `pending-lact/` retains the historical proposed helper and installer. Conditional restoration is now included in the deployed `reference-system/` reconnect helper.
 
 The older `maintenance/` installers remain historical and can contain superseded kernel guards. Do not use them to overwrite the latest reference implementation. Every layered rollback must run in reverse installation order.
 
@@ -56,4 +56,8 @@ Run bundle regression tests with `python3 -m unittest discover -s tests`. They i
 
 ## September 15 package-query fix
 
-The current reference loader captures pacman stdout and stderr separately for package identity checks, retaining exit-code and exact-version validation. Display and reconnect hash dependencies were updated together. See the incident report in `docs/SEPTEMBER-15-PACKAGE-QUERY-FIX.md`. Historical installers and the older `pending-lact/` installer retain their historical baselines; do not run them over the updated reference. Integrating LACT restoration must preserve the new loader/display hash pins. The tested private repair is not distributed as a universal unlock utility: its permission to archive a lockout was specific to the reviewed pre-initialization failure.
+The current reference loader captures pacman stdout and stderr separately for package identity checks, retaining exit-code and exact-version validation. Display and reconnect hash dependencies were updated together. See the incident report in `docs/SEPTEMBER-15-PACKAGE-QUERY-FIX.md`. Historical installers and the older `pending-lact/` installer retain their historical baselines; do not run them over the updated reference. The current reference includes LACT restoration with the updated integrity chain. The tested private repair is not distributed as a universal unlock utility: its permission to archive a lockout was specific to the reviewed pre-initialization failure.
+
+## September 15 update automation and live tray readings
+
+See [the complete update program](automatic-updates/README.md) and [latest incident and validation report](../docs/SEPTEMBER-15-UPDATES-AND-TELEMETRY.md). The registry reader and update manager are also mirrored under reference-system. The runtime registry and installed-hashes manifest are generated machine state, not portable configuration. The tray now polls GPU utilization and watts asynchronously and reaps its monitoring child before invoking safe eject.

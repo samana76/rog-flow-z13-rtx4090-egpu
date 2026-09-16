@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/usr/local/sbin/gpd-egpu-start",
+    "source": "gpd-egpu-start",
+    "before": "68c09c249104918c84ed27b7f5514f02c22737d0381ce54f28208bfd079e0245",
+    "after": "79eed7c629e3be98c912d43a0ae4c5eb27334a5c12a386983f6319ebbf97faa7"
+  },
+  {
+    "path": "/opt/gpd-egpu/auto/restart-clean-cycle.py",
+    "source": "restart-clean-cycle.py",
+    "before": "1e15fc3ea30c868320e9f1cf557c9246dc75a48bd7494eec8e306d518037986b",
+    "after": "72b78439403eccad6e5d12afee5d46008a3474bdf02d9f4c498e8fb2752fd535"
+  }
+]

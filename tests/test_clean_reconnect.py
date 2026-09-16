@@ -11,6 +11,9 @@ def source_path(name):
     if name=='install-clean-reconnect.py':return B.parent/'code/maintenance'/name
     return B.parent/'code/reference-system/opt/gpd-egpu/auto'/('auto-start.py' if name=='auto-clean-cycle.py' else name)
 def load(name):
+    if name == 'auto-clean-cycle.py':
+        from reference_fixture import load as fixture_load
+        return fixture_load(source_path(name))
     s=importlib.util.spec_from_file_location(name,source_path(name));m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 a=load('auto-clean-cycle.py');r=load('restart-clean-cycle.py')
 

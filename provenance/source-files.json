@@ -7,48 +7,6 @@
     "redaction": "account name replaced with EGPU_USER"
   },
   {
-    "file": "code/reference-system/opt/gpd-egpu/615.71.09/loader.py",
-    "source": "September 15 tested package-query correction applied to confirmed dual-kernel reference payload; optional LACT restoration remains separately documented",
-    "source_sha256": "7ebe0c14b6335970b80e3bb7dfaa1d7d4afa4ba4ab669ef76eee98d73dd14ead",
-    "bundled_sha256": "7ebe0c14b6335970b80e3bb7dfaa1d7d4afa4ba4ab669ef76eee98d73dd14ead",
-    "redaction": "account name replaced with EGPU_USER"
-  },
-  {
-    "file": "code/reference-system/opt/gpd-egpu/display-extension/display-start.py",
-    "source": "September 15 tested package-query correction applied to confirmed dual-kernel reference payload; optional LACT restoration remains separately documented",
-    "source_sha256": "fbdf8cd6ca3ad3aab261cd3176f816422e5f3a50f2a795a7823ca4873ccff370",
-    "bundled_sha256": "313b8f210dd803678424cadfa7e1c63c9af7415b9f15451f8663f202cbdf3bf7",
-    "redaction": "account name replaced with EGPU_USER"
-  },
-  {
-    "file": "code/reference-system/opt/gpd-egpu/auto/restart-clean-cycle.py",
-    "source": "September 15 tested package-query correction applied to confirmed dual-kernel reference payload; optional LACT restoration remains separately documented",
-    "source_sha256": "a7e4b2adcdd3bf8dd8ac0fb458fdd9f22ea113d07e24ba69c622f635b772756c",
-    "bundled_sha256": "3ad714b12ee69f4e37dc741988b9df4bd9799026c752ff67822839fb30b6035e",
-    "redaction": "account name replaced with EGPU_USER"
-  },
-  {
-    "file": "code/reference-system/opt/gpd-egpu/auto/auto-start.py",
-    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
-    "source_sha256": "800c1c117ab634ad560022c5d54c53c9d66f6334536dc9b6853609b2a548b2fc",
-    "bundled_sha256": "800c1c117ab634ad560022c5d54c53c9d66f6334536dc9b6853609b2a548b2fc",
-    "redaction": "account name replaced with EGPU_USER"
-  },
-  {
-    "file": "code/reference-system/usr/local/sbin/gpd-egpu-start",
-    "source": "Validated dual-kernel installation payload; installed successfully per owner, September14",
-    "source_sha256": "68c09c249104918c84ed27b7f5514f02c22737d0381ce54f28208bfd079e0245",
-    "bundled_sha256": "68c09c249104918c84ed27b7f5514f02c22737d0381ce54f28208bfd079e0245",
-    "redaction": "account name replaced with EGPU_USER"
-  },
-  {
-    "file": "code/reference-system/usr/local/libexec/gpd-egpu-eject",
-    "source": "Installed dual-kernel eject payload; owner confirmed physical cycle",
-    "source_sha256": "5f6bfc8d267f6818a81c5834534164c069e33bb3c3156c6415316caba1984fde",
-    "bundled_sha256": "eb615611bd249c1ca7ad9d4adf02ac54981f19a79b64603a7e836816a724a706",
-    "redaction": "account name replaced with EGPU_USER"
-  },
-  {
     "file": "code/maintenance/99-gpd-egpu-auto.rules",
     "source": "/home/EGPU_USER/egpu-staged/working-loader/99-gpd-egpu-auto.rules",
     "source_sha256": "883dd925a7bf4cb98c44c6ccccf01b53917099ed4ea69c7e813e472ee8bc51f5",
@@ -94,14 +52,14 @@
     "file": "tests/test_clean_reconnect.py",
     "source": "/home/EGPU_USER/egpu-staged/working-loader/test_clean_reconnect.py",
     "source_sha256": "cb7b3dde3d2e235747bdd40c9083e2bbc594020578651b4eb65ea70b1a4c81ed",
-    "bundled_sha256": "1f0f95c803fd085b82e29654151dbf09881ec6e8d2a6496e13701b90799d0fce",
+    "bundled_sha256": "f5d6b8087d6e8245c78fdf47d7c19c165ce22fc2f668197c1c0541585e8f44b5",
     "redaction": "account name replaced with EGPU_USER"
   },
   {
     "file": "tests/test_eject.py",
     "source": "/home/EGPU_USER/egpu-staged/working-loader/test_eject.py",
     "source_sha256": "7b9d446f793ac3ab30a45e737177b469b3493fbc30d82b5269bc1fecd1382f68",
-    "bundled_sha256": "5d65de79d59d801be5a3b6d207dc93bd102f8f20790d8e074095e1c600ba2b4c",
+    "bundled_sha256": "77da9df8b797b51553c2199487a911472dff03e848182dea1995e11217e14980",
     "redaction": "account name replaced with EGPU_USER"
   },
   {
@@ -130,13 +88,6 @@
     "source": "/etc/modprobe.d/zzz-gpd-egpu-controlled-load.conf",
     "source_sha256": "936b753df9f4b12071acb7e983315e2b71002a971bfb3702a8b4fe4358463bed",
     "bundled_sha256": "936b753df9f4b12071acb7e983315e2b71002a971bfb3702a8b4fe4358463bed",
-    "redaction": "account name replaced with EGPU_USER"
-  },
-  {
-    "file": "code/tray/egpu-tray.py",
-    "source": "/home/EGPU_USER/egpu-staged/working-loader/tray/egpu-tray.py",
-    "source_sha256": "5a3397e88f9aae511fdc0435dd5994e40a70821332e2f877efa2f967dbb79c5a",
-    "bundled_sha256": "4725123b7ec314a9daf6b6103ae3c9946f90b206f7cff2b9650e2f77ddd84539",
     "redaction": "account name replaced with EGPU_USER"
   },
   {
@@ -263,6 +214,202 @@
     "source": "Tiny CUDA child validated on CachyOS7.2.5",
     "source_sha256": "8866fb7fae5032e4b2a85f72978a0a4460fc6f224c72e2fbbf069d690ea309cb",
     "bundled_sha256": "8866fb7fae5032e4b2a85f72978a0a4460fc6f224c72e2fbbf069d690ea309cb",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/615.71.09/loader.py",
+    "source": "Installed update-support payload; routing correction applied and owner-confirmed, September 15",
+    "source_sha256": "b007d38f73b42387fe23e81d0228e6135ecdb194aaf570cbf2e40b184e51a868",
+    "bundled_sha256": "b007d38f73b42387fe23e81d0228e6135ecdb194aaf570cbf2e40b184e51a868",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/display-extension/display-start.py",
+    "source": "Installed update-support payload; routing correction applied and owner-confirmed, September 15",
+    "source_sha256": "12158c548aa238800c0f8411816473ef7bb4969141f5b4292a4afc9a786899db",
+    "bundled_sha256": "3eec4a9131a065842ec0520b0c1954261afa2153c11b0652079ad50ed08f399a",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/reference-system/usr/local/libexec/gpd-egpu-eject",
+    "source": "Installed update-support payload; routing correction applied and owner-confirmed, September 15",
+    "source_sha256": "53b3974d377c556c194db65392e31c4f907aded94aa86b017717c0dbb311140f",
+    "bundled_sha256": "126750c976511b95cf048fbfdb2269a3769b93d47902ed918ee00413eea26c12",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/auto/restart-clean-cycle.py",
+    "source": "Installed update-support payload; routing correction applied and owner-confirmed, September 15",
+    "source_sha256": "72b78439403eccad6e5d12afee5d46008a3474bdf02d9f4c498e8fb2752fd535",
+    "bundled_sha256": "0b6974ae997e6ad848da36e6c49e780bb4115aabb618631d3873ee2a8bcf0b9f",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/auto/auto-start.py",
+    "source": "Installed update-support payload; routing correction applied and owner-confirmed, September 15",
+    "source_sha256": "cca402c448312970e698960e5941dbe6a5b68a88d0e34f26ddd93cd68b4219a0",
+    "bundled_sha256": "cca402c448312970e698960e5941dbe6a5b68a88d0e34f26ddd93cd68b4219a0",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/reference-system/usr/local/sbin/gpd-egpu-start",
+    "source": "Installed registry-based display dispatch correction",
+    "source_sha256": "79eed7c629e3be98c912d43a0ae4c5eb27334a5c12a386983f6319ebbf97faa7",
+    "bundled_sha256": "79eed7c629e3be98c912d43a0ae4c5eb27334a5c12a386983f6319ebbf97faa7",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/tray/egpu-tray.py",
+    "source": "Installed tray with tested asynchronous utilization/power telemetry",
+    "source_sha256": "e8d08d6c800a4f5bce3b346d0c86fee64fbd691615b21aea868d9ac315f3325c",
+    "bundled_sha256": "29d5ee4fcf79b6db66eb3ab201ead3d9e680a4ee8f75821a9cd2a82468962e9b",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/registry.py",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "524499d9ee094d98023cdd63d1461dc1ea0989612be929d9f458869d647125b3",
+    "bundled_sha256": "524499d9ee094d98023cdd63d1461dc1ea0989612be929d9f458869d647125b3",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/loader.py",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "b007d38f73b42387fe23e81d0228e6135ecdb194aaf570cbf2e40b184e51a868",
+    "bundled_sha256": "b007d38f73b42387fe23e81d0228e6135ecdb194aaf570cbf2e40b184e51a868",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/display-start.py",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "12158c548aa238800c0f8411816473ef7bb4969141f5b4292a4afc9a786899db",
+    "bundled_sha256": "3eec4a9131a065842ec0520b0c1954261afa2153c11b0652079ad50ed08f399a",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/gpd-egpu-eject",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "53b3974d377c556c194db65392e31c4f907aded94aa86b017717c0dbb311140f",
+    "bundled_sha256": "126750c976511b95cf048fbfdb2269a3769b93d47902ed918ee00413eea26c12",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/restart-clean-cycle.py",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "1e15fc3ea30c868320e9f1cf557c9246dc75a48bd7494eec8e306d518037986b",
+    "bundled_sha256": "ca46a42b62ace9260d92d5a512419e9d48e0f128f462abbf65285e3fff1c42ac",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/auto-start.py",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "cca402c448312970e698960e5941dbe6a5b68a88d0e34f26ddd93cd68b4219a0",
+    "bundled_sha256": "cca402c448312970e698960e5941dbe6a5b68a88d0e34f26ddd93cd68b4219a0",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/registry.json",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "6d87e8515215edcae4ead9f7ac4f0a23d3f6e2b3c97a96691e9138932cb5a4a4",
+    "bundled_sha256": "6d87e8515215edcae4ead9f7ac4f0a23d3f6e2b3c97a96691e9138932cb5a4a4",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/changes.json",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "f2035833ff6ed0f69d2f936fd3b1d81a5bc0fb52dc31f826901cffb86ce06e6d",
+    "bundled_sha256": "f2035833ff6ed0f69d2f936fd3b1d81a5bc0fb52dc31f826901cffb86ce06e6d",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/update.py",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "27bff02cc70c93ac96fe535ada0c4559bb85ee8c72fac8782abbe2f67e278730",
+    "bundled_sha256": "27bff02cc70c93ac96fe535ada0c4559bb85ee8c72fac8782abbe2f67e278730",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/00-gpd-egpu-update-pre.hook",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "6396d0015f1757f9c9ebcac9218e42d2c628bca381f87c4a129fd98178f7a819",
+    "bundled_sha256": "6396d0015f1757f9c9ebcac9218e42d2c628bca381f87c4a129fd98178f7a819",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/payload/zz-gpd-egpu-update-post.hook",
+    "source": "Update-support original installation baseline; routing correction supersedes entrypoint and restart hash",
+    "source_sha256": "f3c9fb50ba855443e8b8f8ba6ef6ee13fc2f2bf83d07adebfd5d264a77786775",
+    "bundled_sha256": "f3c9fb50ba855443e8b8f8ba6ef6ee13fc2f2bf83d07adebfd5d264a77786775",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/update-support/registry.py",
+    "source": "Installed update-support source",
+    "source_sha256": "524499d9ee094d98023cdd63d1461dc1ea0989612be929d9f458869d647125b3",
+    "bundled_sha256": "524499d9ee094d98023cdd63d1461dc1ea0989612be929d9f458869d647125b3",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/reference-system/opt/gpd-egpu/update-support/update.py",
+    "source": "Installed update-support source",
+    "source_sha256": "27bff02cc70c93ac96fe535ada0c4559bb85ee8c72fac8782abbe2f67e278730",
+    "bundled_sha256": "27bff02cc70c93ac96fe535ada0c4559bb85ee8c72fac8782abbe2f67e278730",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/routing-fix/gpd-egpu-start",
+    "source": "Machine-specific applied routing repair; not a generic installer",
+    "source_sha256": "79eed7c629e3be98c912d43a0ae4c5eb27334a5c12a386983f6319ebbf97faa7",
+    "bundled_sha256": "79eed7c629e3be98c912d43a0ae4c5eb27334a5c12a386983f6319ebbf97faa7",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/routing-fix/restart-clean-cycle.py",
+    "source": "Machine-specific applied routing repair; not a generic installer",
+    "source_sha256": "72b78439403eccad6e5d12afee5d46008a3474bdf02d9f4c498e8fb2752fd535",
+    "bundled_sha256": "0b6974ae997e6ad848da36e6c49e780bb4115aabb618631d3873ee2a8bcf0b9f",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/routing-fix/install.py",
+    "source": "Machine-specific applied routing repair; not a generic installer",
+    "source_sha256": "9bf3828f157170ffb80266562eed5530c7c3b2f641946a0147394651b46141ee",
+    "bundled_sha256": "9bf3828f157170ffb80266562eed5530c7c3b2f641946a0147394651b46141ee",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/routing-fix/rollback.py",
+    "source": "Machine-specific applied routing repair; not a generic installer",
+    "source_sha256": "6991697a84e22463592792bdefa358c50214d31e8d8f5cc59726adb6dcea2e85",
+    "bundled_sha256": "6991697a84e22463592792bdefa358c50214d31e8d8f5cc59726adb6dcea2e85",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/routing-fix/changes.json",
+    "source": "Machine-specific applied routing repair; not a generic installer",
+    "source_sha256": "6532610eb19df2e84ce4b023a31c295c7067411690338de7356dcbfd74205332",
+    "bundled_sha256": "6532610eb19df2e84ce4b023a31c295c7067411690338de7356dcbfd74205332",
+    "redaction": "account name replaced with EGPU_USER; original integrity pins retained for provenance, adaptation required"
+  },
+  {
+    "file": "code/automatic-updates/install.py",
+    "source": "Original installed update-support integration source; baseline seals intentionally retained",
+    "source_sha256": "8b225eb4c3f9cdc0bcfc1dea6de50c0b91b9b61e7696c99204265256c0377c5a",
+    "bundled_sha256": "8b225eb4c3f9cdc0bcfc1dea6de50c0b91b9b61e7696c99204265256c0377c5a",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/automatic-updates/rollback.py",
+    "source": "Original installed update-support integration source; baseline seals intentionally retained",
+    "source_sha256": "e17533199238944d4064fbe443152ec8b8a35605c4fe8326454bed7ed7f613fa",
+    "bundled_sha256": "e17533199238944d4064fbe443152ec8b8a35605c4fe8326454bed7ed7f613fa",
+    "redaction": "account name replaced with EGPU_USER"
+  },
+  {
+    "file": "code/automatic-updates/payload-seal.json",
+    "source": "Original installed update-support integration source; baseline seals intentionally retained",
+    "source_sha256": "0aef2949cb7c214e31334957580a32bc447e53bd9d0b868cea2cbdefa8fe125c",
+    "bundled_sha256": "0aef2949cb7c214e31334957580a32bc447e53bd9d0b868cea2cbdefa8fe125c",
     "redaction": "account name replaced with EGPU_USER"
   }
 ]

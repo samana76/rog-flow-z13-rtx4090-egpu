@@ -1,0 +1,25 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = linux
+Target = linux-headers
+Target = linux-cachyos
+Target = linux-cachyos-headers
+Target = linux-cachyos-lts
+Target = linux-cachyos-lts-headers
+Target = nvidia*
+Target = opencl-nvidia
+Target = lib32-nvidia-utils
+Target = lib32-opencl-nvidia
+Target = limine*
+Target = mkinitcpio*
+
+[Action]
+Description = Preparing and validating private eGPU modules before updates...
+When = PreTransaction
+Exec = /usr/bin/python3 -E -s /opt/gpd-egpu/update-support/update.py pre
+NeedsTargets
+AbortOnFail
+NetworkAccess = allowed
